@@ -20,15 +20,16 @@ public class Interfaz extends JFrame implements ActionListener{
     public JPanel juego = new JPanel();
     private auto a = new auto();
     public String direction = null;
-    
-
+    int x=50;
+    int y=140;
+    private Colisiones coli;
     public void actionPerformed(ActionEvent e){
         
     }
     
       public Interfaz(){
 
-        this.setSize(1920, 1080);
+        this.setSize(960, 780);
         this.setTitle(" Super Auto");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -41,24 +42,37 @@ public class Interfaz extends JFrame implements ActionListener{
 
 			
 			public void keyPressed(KeyEvent e) {
-				System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
-                                if(KeyEvent.getKeyText(e.getKeyCode())=="D"){
+				
+                                if(KeyEvent.getKeyText(e.getKeyCode())=="Right"){
+                                    x=x+10;
                                     direction = "Right";
+                                    Colisiones();
+                                    repaint();
                                 }
-                                if(KeyEvent.getKeyText(e.getKeyCode())=="A"){
+                                if(KeyEvent.getKeyText(e.getKeyCode())=="Left"){
+                                    x=x-10;
                                     direction = "Left";
+                                    Colisiones();
+                                    repaint();
                                 }
-                                if(KeyEvent.getKeyText(e.getKeyCode())=="W"){
+                                if(KeyEvent.getKeyText(e.getKeyCode())=="Up"){
+                                    y=y-10;
                                     direction = "Up";
+                                    Colisiones();
+                                    repaint();
                                 }
-                                if(KeyEvent.getKeyText(e.getKeyCode())=="S"){
+                                if(KeyEvent.getKeyText(e.getKeyCode())=="Down"){
+                                    y=y+10;
                                     direction = "Down";
+                                    Colisiones();
+                                    repaint();
                                 }
+                                
 			}
 
 			
 			public void keyReleased(KeyEvent e) {
-				System.out.println("keyReleased="+KeyEvent.getKeyText(e.getKeyCode()));
+				
                                 direction = null;
 			}
         };
@@ -66,21 +80,37 @@ public class Interfaz extends JFrame implements ActionListener{
 		setFocusable(true);
 
     }
+      public int Colisiones(){
+          if(x<=10){
+              x=x+10;
+              repaint();
+          }
+          if(x>=950){
+          x=x-10;
+          }
+          if(y<=45){
+              y=y+10;
+          }
+          if(y>=755){
+              y=y-10;
+          }
+          return 0;
+      }
+      
     
     public void paint(Graphics g){
         super.paint(g);
         a.paint(g);
-        int x = 950;
-        int y = 540;
-        
+
         Polygon p   = new Polygon();
-        p.addPoint(x+200, y+100);
-        p.addPoint(x+200, y+ -100);
-        p.addPoint(x-200, y-100);
-        p.addPoint(x-200, y+100);
+        p.addPoint(x+10, y+20);
+        p.addPoint(x+10, y+ -20);
+        p.addPoint(x-10, y-20);
+        p.addPoint(x-10, y+20);
         g.setColor(Color.red);
         g.fillPolygon(p);
         g.dispose();
+        repaint();
         
     }
 }
