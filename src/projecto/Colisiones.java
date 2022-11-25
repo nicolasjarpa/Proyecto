@@ -11,9 +11,7 @@ import java.awt.Polygon;
 public class Colisiones {
 
 public int Colisiones(){
-    if(){
-       System.out.println("limite");
-    }
+
        
 return 0;
 }

@@ -14,8 +14,8 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import java.awt.event.*;
 
-public class Interfaz extends JPanel implements ActionListener, KeyListener {
-
+public class Interfaz extends JPanel implements  KeyListener {
+    private Image fondo;
     public JPanel juego = new JPanel();
     private auto auto = new auto();
     public String direction = null;
@@ -26,15 +26,12 @@ public class Interfaz extends JPanel implements ActionListener, KeyListener {
     private boolean w, a, s, d, up, down, right, left;
     Polygon p = new Polygon();
 
-    public void actionPerformed(ActionEvent e) {
-
-    }
 
     public Interfaz() {
-
-        this.setSize(960, 780);
-
+    fondo = new ImageIcon("pista3.png").getImage();
+        
     }
+    
 
     public int Colisiones() {
         if (x <= 10) {
@@ -55,21 +52,24 @@ public class Interfaz extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void paint(Graphics g) {
+         
+    
         super.paint(g);
-
+       g.drawImage(fondo,0,0,getWidth(),getHeight(), null);
+        setOpaque(false);
         if (w) {
-            x += 0.1f * Math.cos(Math.toRadians(angle));
-            y += 0.1f * Math.sin(Math.toRadians(angle));
+            x += 0.5f * Math.cos(Math.toRadians(angle));
+            y += 0.5f * Math.sin(Math.toRadians(angle));
         }
         if (s) {
-            x -= 0.1f * Math.cos(Math.toRadians(angle));
-            y -= 0.1f * Math.sin(Math.toRadians(angle));
+            x -= 0.5f * Math.cos(Math.toRadians(angle));
+            y -= 0.5f * Math.sin(Math.toRadians(angle));
         }
         if (a) {
-            angle -= 0.05f;
+            angle -= 0.5f;
         }
         if (d) {
-            angle += 0.05f;
+            angle += 0.5f;
         }
         
         update_auto();
