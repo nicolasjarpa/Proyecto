@@ -19,36 +19,20 @@ public class Interfaz extends JPanel implements  KeyListener {
     public JPanel juego = new JPanel();
     private auto auto = new auto();
     public String direction = null;
-    float x = 20f;   // posicion x auto
-    float y = 20f;   // posicion y auto
+       // posicion y auto
     float angle = 0f;
-    private Colisiones coli;
+    private Colisiones coli=new Colisiones();
     private boolean w, a, s, d, up, down, right, left;
     Polygon p = new Polygon();
-
+    
 
     public Interfaz() {
+        
     fondo = new ImageIcon("pista3.png").getImage();
         
     }
     
 
-    public int Colisiones() {
-        if (x <= 10) {
-            x = x + 10;
-
-        }
-        if (x >= 950) {
-            x = x - 10;
-        }
-        if (y <= 45) {
-            y = y + 10;
-        }
-        if (y >= 755) {
-            y = y - 10;
-        }
-        return 0;
-    }
 
     @Override
     public void paint(Graphics g) {
@@ -58,18 +42,22 @@ public class Interfaz extends JPanel implements  KeyListener {
        g.drawImage(fondo,0,0,getWidth(),getHeight(), null);
         setOpaque(false);
         if (w) {
-            x += 0.5f * Math.cos(Math.toRadians(angle));
-            y += 0.5f * Math.sin(Math.toRadians(angle));
+            coli.x += 1.9f * Math.cos(Math.toRadians(angle));
+            coli.y += 1.9f * Math.sin(Math.toRadians(angle));
+            coli.Colisiones();
         }
         if (s) {
-            x -= 0.5f * Math.cos(Math.toRadians(angle));
-            y -= 0.5f * Math.sin(Math.toRadians(angle));
+            coli.x -= 0.9f * Math.cos(Math.toRadians(angle));
+            coli.y -= 0.9f * Math.sin(Math.toRadians(angle));
+            coli.Colisiones();
         }
         if (a) {
-            angle -= 0.5f;
+            angle -= 0.9f;
+            coli.Colisiones();
         }
         if (d) {
-            angle += 0.5f;
+            angle += 0.9f;
+            coli.Colisiones();
         }
         
         update_auto();
@@ -96,15 +84,19 @@ public class Interfaz extends JPanel implements  KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             w = true;
+           
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
             a = true;
+           
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
             s = true;
+            
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             d = true;
+          
         }
         /*if (e.getKeyCode() == KeyEvent.VK_UP) {
             up = true;
@@ -124,15 +116,19 @@ public class Interfaz extends JPanel implements  KeyListener {
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             w = false;
+            
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
             a = false;
+            
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
             s = false;
+            
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             d = false;
+            
         }
 
         /*if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -158,22 +154,22 @@ public class Interfaz extends JPanel implements  KeyListener {
 
         float px = 10f;
         float py = -20f;
-        p.addPoint((int) (x + px * cos - py * sin), (int) (y + px * sin + py * cos));
+        p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
 
 
         px = -20f;
         py = -5f;
-        p.addPoint((int) (x + px * cos - py * sin), (int) (y + px * sin + py * cos));
+        p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
 
 
         px = -10f;
         py = 20f;
-        p.addPoint((int) (x + px * cos - py * sin), (int) (y + px * sin + py * cos));
+        p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
 
 
         px = 20f;
         py = 5f;
-        p.addPoint((int) (x + px * cos - py * sin), (int) (y + px * sin + py * cos));
+        p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
     }
 
 }
