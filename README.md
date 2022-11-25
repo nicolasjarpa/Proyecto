@@ -1,1 +1,2 @@
-# Proyecto
+Integrantes
+Nicolás Jarpa Pedro Gajardo
