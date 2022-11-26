@@ -13,53 +13,78 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import java.awt.event.*;
+import java.awt.Shape;
 
-public class Interfaz extends JPanel implements  KeyListener {
+public class Interfaz extends JPanel implements KeyListener, ActionListener {
+
     private Image fondo;
     public JPanel juego = new JPanel();
     private auto auto = new auto();
     public String direction = null;
-       // posicion y auto
+    // posicion y auto
     float angle = 0f;
-    private Colisiones coli=new Colisiones();
+    private Colisiones coli = new Colisiones();
     private boolean w, a, s, d, up, down, right, left;
+    float vel = 0f;
+    private Graphics limite, pista, pasto, tierra;
+    private float pastomas = 0f, pastomenos = 0f;
+    private float width = getWidth() - 400;
+    private float height = getHeight() - 400;
+    public JButton aumento = new JButton();
+    public JButton decrease = new JButton();
+    public ButtonGroup grupo = new ButtonGroup();
     Polygon p = new Polygon();
-    
 
     public Interfaz() {
-        
-    fondo = new ImageIcon("pista3.png").getImage();
-        
-    }
-    
 
+        /* fondo = new ImageIcon("pista3.png").getImage(); */
+    }
 
     @Override
     public void paint(Graphics g) {
-         
-    
+
         super.paint(g);
-       g.drawImage(fondo,0,0,getWidth(),getHeight(), null);
-        setOpaque(false);
+        limite = g;
+        pista = g;
+        pasto = g;
+        tierra = g;
+
+        /*g.drawImage(fondo, 0, 0, getWidth(), getHeight(), null);
+        setOpaque(false);*/
+        limite.setColor(Color.blue);
+        limite.fillRect(0, 0, getWidth(), getHeight());
+        pista.setColor(Color.DARK_GRAY);
+        pista.fillRect(50, 50, getWidth() - 100, getHeight() - 100);
+        pasto.setColor(Color.green);
+        pasto.fillRect(200, 200, getWidth() - 400 + (int) pastomas - (int) pastomenos, getHeight() - 400 + (int) pastomas - (int) pastomenos);
+        tierra.setColor(Color.black);
+        tierra.fillRect(350, 350, getWidth() - 700, getHeight() - 700);
+        
+        config();
+
         if (w) {
-            coli.x += 1.9f * Math.cos(Math.toRadians(angle));
-            coli.y += 1.9f * Math.sin(Math.toRadians(angle));
-            coli.Colisiones();
+            vel += 0.01f;
+
         }
         if (s) {
-            coli.x -= 0.9f * Math.cos(Math.toRadians(angle));
-            coli.y -= 0.9f * Math.sin(Math.toRadians(angle));
-            coli.Colisiones();
+            vel -= 0.01f;
+
         }
         if (a) {
-            angle -= 0.9f;
-            coli.Colisiones();
+            angle -= 0.5f;
+
         }
         if (d) {
-            angle += 0.9f;
-            coli.Colisiones();
+            angle += 0.5f;
+
         }
-        
+        if (vel > 0.8f) {
+            vel = 0.8f;
+        }
+        vel *= 0.995f;
+        coli.x += vel * Math.cos(Math.toRadians(angle));
+        coli.y += vel * Math.sin(Math.toRadians(angle));
+
         update_auto();
         /*p = new Polygon();
         p.addPoint((int)x+5, (int)y+10);
@@ -84,19 +109,19 @@ public class Interfaz extends JPanel implements  KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             w = true;
-           
+
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
             a = true;
-           
+
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
             s = true;
-            
+
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             d = true;
-          
+
         }
         /*if (e.getKeyCode() == KeyEvent.VK_UP) {
             up = true;
@@ -116,19 +141,19 @@ public class Interfaz extends JPanel implements  KeyListener {
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             w = false;
-            
+
         }
         if (e.getKeyCode() == KeyEvent.VK_A) {
             a = false;
-            
+
         }
         if (e.getKeyCode() == KeyEvent.VK_S) {
             s = false;
-            
+
         }
         if (e.getKeyCode() == KeyEvent.VK_D) {
             d = false;
-            
+
         }
 
         /*if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -151,25 +176,48 @@ public class Interfaz extends JPanel implements  KeyListener {
 
         p = new Polygon();
 
-
-        float px = 10f;
-        float py = -20f;
+        float px = 15f; // der adelante
+        float py = -10f;
         p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
-
 
         px = -20f;
-        py = -5f;
+        py = -20f;
         p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
 
-
-        px = -10f;
+        px = -20f;
         py = 20f;
         p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
 
-
-        px = 20f;
-        py = 5f;
+        px = 15f; // izq adelante
+        py = 10f;
         p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == aumento) {
+            pastomas += 1f;
+            
+            if (getWidth() - 400 + (int) pastomas - (int) pastomenos == getWidth() - 400 && getHeight() - 400 + (int) pastomas - (int) pastomenos == getHeight() - 400) {
+                pastomas = 0f;
+            }
+        } else if (e.getSource() == decrease) {
+            pastomenos += 1f;
+            
+            if (getWidth() - 400 + (int) pastomas - (int) pastomenos == getWidth() - 400 && getHeight() - 400 + (int) pastomas - (int) pastomenos == getHeight() - 400) {
+                pastomenos = 0f;
+            }
+        }
+    }
+
+    public void config() {
+        juego.setLayout(null);
+        grupo.add(aumento);
+        aumento.setBounds(100, 100, 150, 150);
+        juego.add(aumento);
+        aumento.addActionListener(this);
+        aumento.setVisible(true);
+
     }
 
 }
