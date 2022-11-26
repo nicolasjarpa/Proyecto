@@ -26,15 +26,14 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     private Colisiones coli = new Colisiones();
     private boolean w, a, s, d, up, down, right, left;
     float vel = 0f;
-    private Graphics limite, pista, pasto, tierra;
-    private float pastomas = 0f, pastomenos = 0f;
+    private float pastomas = 0f, pastomenos = 0f;/*borrar despues, pasar a autopista */
     private float width = getWidth() - 400;
     private float height = getHeight() - 400;
+    public Autopista autopista=new Autopista();
     public JButton aumento = new JButton();
     public JButton decrease = new JButton();
     public ButtonGroup grupo = new ButtonGroup();
-    Polygon p = new Polygon();
-
+    Polygon p = new Polygon();    
     public Interfaz() {
 
         /* fondo = new ImageIcon("pista3.png").getImage(); */
@@ -44,21 +43,11 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public void paint(Graphics g) {
 
         super.paint(g);
-        limite = g;
-        pista = g;
-        pasto = g;
-        tierra = g;
+       autopista.paint(g);
 
         /*g.drawImage(fondo, 0, 0, getWidth(), getHeight(), null);
         setOpaque(false);*/
-        limite.setColor(Color.blue);
-        limite.fillRect(0, 0, getWidth(), getHeight());
-        pista.setColor(Color.DARK_GRAY);
-        pista.fillRect(50, 50, getWidth() - 100, getHeight() - 100);
-        pasto.setColor(Color.green);
-        pasto.fillRect(200, 200, getWidth() - 400 + (int) pastomas - (int) pastomenos, getHeight() - 400 + (int) pastomas - (int) pastomenos);
-        tierra.setColor(Color.black);
-        tierra.fillRect(350, 350, getWidth() - 700, getHeight() - 700);
+        
         
         config();
 
@@ -84,7 +73,12 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         vel *= 0.995f;
         coli.x += vel * Math.cos(Math.toRadians(angle));
         coli.y += vel * Math.sin(Math.toRadians(angle));
-
+        coli.Colisiones();
+        coli.Colisionestierra();
+        if(coli.colision==true){
+            System.out.println("colision"+this.coli.x);
+            System.out.println("colision"+this.coli.y);
+        }
         update_auto();
         /*p = new Polygon();
         p.addPoint((int)x+5, (int)y+10);

@@ -10,26 +10,50 @@ import javax.swing.JPanel;
 public class Colisiones{
   float x = 150f;   // posicion x auto
     float y = 200f;   
-
-public int Colisiones(){
- if (x <= 40 || ( x>= 1215&&x<=1220 && y>=180 && y <= 640)) {
-            x = x + 10;
-
+    boolean colision;
+public boolean Colisiones(){
+    if (x <= 60) {
+            x = x + 2;
+            return colision=true;
+           
         }
-        if (x >= 1460 || ( x<=305 &&x>=300 && y>=180 && y <= 640)){
-            x = x - 10;
+        if (x >= 1485 ){
+            x = x - 2;
+            return colision=true;
         }
-        if (y <= 50 ||( y>=640 &&y<=645  && x>=300 && x <= 1220)) {
-            y = y + 5;
+        if (y <= 60 ) {
+            y = y + 2;
+            return colision=true;
         }
-        if (y >= 805||(  y>=180 && y <=186&& x>=300 && x <= 1220)) {
-            y = y - 10;
+        if (y >= 785){
+            y = y - 2;
+            return colision=true;
         }
      
    
        
-return 0;
+return colision=false;
 }
-
-
+public boolean Colisionestierra(){
+    if((x>= 350 && x<=1250)&&(y>=349 && y <=350)){
+        y = y-1;
+        return colision=true;}
+       if((x>= 350 && x<=1250)&&(y>=549 && y <=550)){
+        y = y+1;
+        return colision=true;
+       }
+       if((x>= 350 && x<351)&&(y>=350 && y <=549)){
+        x = x-1;
+        return colision=true;
+       }
+        if((x>= 1250 && x<1251)&&(y>=350 && y <=549)){
+        x = x+1;
+        return colision=true;
+       }
+      
+    return false;
+}
+public boolean Efectoroce(){
+    return false;
+}
 }
