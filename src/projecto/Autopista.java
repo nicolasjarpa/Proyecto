@@ -8,9 +8,11 @@ import java.awt.Graphics;
 public class Autopista {
     private Graphics limite, pista, pasto, tierra;
     public float pastomas = 0f, pastomenos = 0f;
-    public float largotierra=0f;
-    public float altotierra=0f;
+   public int largopasto=0;
+    public int altopasto=0;
+    private Interfaz interfaz;
     public Autopista(){
+        
         
     }
     public void paint(Graphics g){
@@ -26,7 +28,11 @@ public class Autopista {
         pasto.fillRect(200, 200, 1100 + (int) pastomas - (int) pastomenos, 500+ (int) pastomas - (int) pastomenos);
         tierra.setColor(Color.black);
         tierra.fillRect(350, 350, 900, 200);
+        largopasto= 1100 + (int) pastomas - (int) pastomenos;
+        altopasto=500+ (int) pastomas - (int) pastomenos;
         
     }
+
+  
 }
 

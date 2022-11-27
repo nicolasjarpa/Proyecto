@@ -52,12 +52,23 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         
 
         if (w) {
-            vel += 0.01f;
+            if(coli.roce ==true){
+                auto.vel+=0.0025f;
+            }
+            else{
+            auto.vel += 0.01f;
+            
 
         }
+    }
         if (s) {
-            vel -= 0.01f;
+            if(coli.roce==true){
+                auto.vel-=0.0025f;
+            }
+            else{
+            auto.vel -= 0.01f;
 
+        }
         }
         if (a) {
             angle -= 0.5f;
@@ -67,15 +78,28 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
             angle += 0.5f;
 
         }
-        if (vel > 0.8f) {
-            vel = 0.8f;
+        if(coli.roce==true){
+           if(auto.vel>0.4f){
+               auto.vel=0.4f;
+           }
+        
+        else if (vel > 0.8f) {
+            auto.vel = 0.8f;
         }
-        vel *= 0.995f;
-        coli.x += vel * Math.cos(Math.toRadians(angle));
-        coli.y += vel * Math.sin(Math.toRadians(angle));
+        }
+        
+        auto.vel *= 0.995f;
+        coli.x += auto.vel * Math.cos(Math.toRadians(angle));
+        coli.y += auto.vel * Math.sin(Math.toRadians(angle));
+        coli.roce();
         coli.Colisiones();
         coli.Colisionestierra();
+        if(coli.roce ==true){
+            System.out.println("roce");
+        }
         if (coli.colision == true) {
+            System.out.println(""+autopista.largopasto);
+     System.out.println(""+autopista.altopasto);
             System.out.println("colision" + this.coli.x);
             System.out.println("colision" + this.coli.y);
         }

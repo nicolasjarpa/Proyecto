@@ -11,6 +11,8 @@ public class Colisiones{
   float x = 150f;   // posicion x auto
     float y = 200f;   
     boolean colision;
+    boolean roce;
+    private Autopista autopista;
 public boolean Colisiones(){
     if (x <= 60) {
             x = x + 2;
@@ -53,7 +55,12 @@ public boolean Colisionestierra(){
       
     return false;
 }
-public boolean Efectoroce(){
-    return false;
+public boolean roce(){
+     if(x>=200 && y>=200 && x <=1300 && y<=700){
+         
+         return roce=true;
+     }
+     
+    return roce=false;
 }
 }
