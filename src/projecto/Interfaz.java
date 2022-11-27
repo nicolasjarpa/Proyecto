@@ -18,7 +18,6 @@ import java.awt.Shape;
 public class Interfaz extends JPanel implements KeyListener, ActionListener {
 
     private Image fondo;
-    public JPanel juego = new JPanel();
     private auto auto = new auto();
     public String direction = null;
     // posicion y auto
@@ -26,15 +25,18 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     private Colisiones coli = new Colisiones();
     private boolean w, a, s, d, up, down, right, left;
     float vel = 0f;
-    private float pastomas = 0f, pastomenos = 0f;/*borrar despues, pasar a autopista */
+    /*borrar despues, pasar a autopista */
     private float width = getWidth() - 400;
     private float height = getHeight() - 400;
-    public Autopista autopista=new Autopista();
-    public JButton aumento = new JButton();
+    public Autopista autopista = new Autopista();
+    public JButton aumento = new JButton("aumentar");
     public JButton decrease = new JButton();
     public ButtonGroup grupo = new ButtonGroup();
-    Polygon p = new Polygon();    
+    Polygon p = new Polygon();
+    
+
     public Interfaz() {
+
 
         /* fondo = new ImageIcon("pista3.png").getImage(); */
     }
@@ -43,13 +45,11 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public void paint(Graphics g) {
 
         super.paint(g);
-       autopista.paint(g);
+        autopista.paint(g);
 
         /*g.drawImage(fondo, 0, 0, getWidth(), getHeight(), null);
         setOpaque(false);*/
         
-        
-        config();
 
         if (w) {
             vel += 0.01f;
@@ -75,17 +75,12 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         coli.y += vel * Math.sin(Math.toRadians(angle));
         coli.Colisiones();
         coli.Colisionestierra();
-        if(coli.colision==true){
-            System.out.println("colision"+this.coli.x);
-            System.out.println("colision"+this.coli.y);
+        if (coli.colision == true) {
+            System.out.println("colision" + this.coli.x);
+            System.out.println("colision" + this.coli.y);
         }
         update_auto();
-        /*p = new Polygon();
-        p.addPoint((int)x+5, (int)y+10);
-        p.addPoint((int)x+5, (int)y-10);
-        p.addPoint((int)x-5, (int)y-10);
-        p.addPoint((int)x-5, (int)y+10); 
-        System.out.println(p.npoints); */
+
         g.setColor(Color.red);
         g.fillPolygon(p);
         Toolkit.getDefaultToolkit().sync();
@@ -190,28 +185,37 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == aumento) {
-            pastomas += 1f;
-            
-            if (getWidth() - 400 + (int) pastomas - (int) pastomenos == getWidth() - 400 && getHeight() - 400 + (int) pastomas - (int) pastomenos == getHeight() - 400) {
-                pastomas = 0f;
+            autopista.pastomas += 1f;
+
+            if (getWidth() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getWidth() - 400 && getHeight() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getHeight() - 400) {
+                autopista.pastomas = 0f;
             }
         } else if (e.getSource() == decrease) {
-            pastomenos += 1f;
-            
-            if (getWidth() - 400 + (int) pastomas - (int) pastomenos == getWidth() - 400 && getHeight() - 400 + (int) pastomas - (int) pastomenos == getHeight() - 400) {
-                pastomenos = 0f;
+            autopista.pastomenos += 1f;
+
+            if (getWidth() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getWidth() - 400 && getHeight() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getHeight() - 400) {
+                autopista.pastomenos = 0f;
             }
         }
     }
 
     public void config() {
-        juego.setLayout(null);
+        this.setLayout(null);
         grupo.add(aumento);
-        aumento.setBounds(100, 100, 150, 150);
-        juego.add(aumento);
+        aumento.setBounds(0, 0, 150, 150);
+        this.add(aumento);
         aumento.addActionListener(this);
         aumento.setVisible(true);
+        aumento.setFocusable(false);
 
+    }
+    
+    public  int getpanelHeight(){
+        return getHeight();
+    }
+    
+    public  int getpanelWidth(){
+        return getWidth();
     }
 
 }
