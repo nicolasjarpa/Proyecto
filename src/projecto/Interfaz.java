@@ -56,7 +56,7 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
                 auto.vel+=0.0025f;
             }
             else{
-            auto.vel += 0.01f;
+            auto.vel += 0.005f;
             
 
         }
@@ -66,7 +66,7 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
                 auto.vel-=0.0025f;
             }
             else{
-            auto.vel -= 0.01f;
+            auto.vel -= 0.005f;
 
         }
         }
@@ -209,13 +209,13 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == aumento) {
-            autopista.pastomas += 1f;
+            autopista.pastomas += 5f;
 
             if (getWidth() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getWidth() - 400 && getHeight() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getHeight() - 400) {
                 autopista.pastomas = 0f;
             }
         } else if (e.getSource() == decrease) {
-            autopista.pastomenos += 1f;
+            autopista.pastomenos += 5f;
 
             if (getWidth() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getWidth() - 400 && getHeight() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getHeight() - 400) {
                 autopista.pastomenos = 0f;
