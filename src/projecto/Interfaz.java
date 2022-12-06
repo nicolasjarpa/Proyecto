@@ -22,6 +22,7 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public String direction = null;
     // posicion y auto
     float angle = 0f;
+    float angleruedas = 0f;
     private Colisiones coli = new Colisiones();
     private boolean w, a, s, d, up, down, right, left;
     float vel = 0f;
@@ -72,10 +73,12 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         }
         if (a) {
             angle -= 0.5f;
+            angleruedas -= 0.6f;
 
         }
         if (d) {
             angle += 0.5f;
+            angleruedas -= 0.6f;
 
         }
         if(coli.roce==true){
@@ -193,17 +196,29 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         float py = -10f;
         p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
 
-        px = -20f;
+        px = -20f; // atras izq
         py = -20f;
         p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
 
-        px = -20f;
+        px = -20f; // atras der
         py = 20f;
         p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
 
         px = 15f; // izq adelante
         py = 10f;
         p.addPoint((int) (coli.x + px * cos - py * sin), (int) (coli.y + px * sin + py * cos));
+        
+        
+    }
+    
+    public void update_ruedas(){
+        float cos = (float) Math.cos(Math.toRadians(angle));
+        float sin = (float) Math.sin(Math.toRadians(angle));
+        
+        float px = 17f; // adelante der
+        float py = -12f;
+        p.addPoint((int) (coli.x + px * cos - py * sin)+2, (int) (coli.y + px * sin + py * cos)-2);
+
     }
 
     @Override

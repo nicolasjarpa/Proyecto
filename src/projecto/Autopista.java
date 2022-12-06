@@ -25,7 +25,7 @@ public class Autopista {
         pista.setColor(Color.DARK_GRAY);
         pista.fillRect(50, 50, 1450 , 750 );
         pasto.setColor(Color.green);
-        pasto.fillRect(200 - (int) pastomas + (int) pastomenos, 200 - (int) pastomas + (int) pastomenos, 1160 + (int) pastomas*2 - (int) pastomenos*2, 480+ (int) pastomas*2 - (int) pastomenos*2);
+        pasto.fillRect(190 - (int) pastomas + (int) pastomenos, 190 - (int) pastomas + (int) pastomenos, 1160 + (int) pastomas*2 - (int) pastomenos*2, 480+ (int) pastomas*2 - (int) pastomenos*2);
         tierra.setColor(Color.black);
         tierra.fillRect(350, 350, 880, 200);
         largopasto= 1100 + (int) pastomas - (int) pastomenos;
