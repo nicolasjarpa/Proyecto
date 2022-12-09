@@ -1,4 +1,3 @@
-
 package projecto;
 
 import java.awt.Color;
@@ -7,72 +6,66 @@ import java.awt.Polygon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Colisiones{
-  float x = 150f;   // posicion x auto
-    float y = 200f; 
-    float r1 = 155f;
-    float r2 = 205f;
-    float r3 = 0f;
-    float r4 = 0f;
+public class Colisiones {
+
+    private auto auto;
     boolean colision;
     boolean roce;
     private Autopista autopista;
-public boolean Colisiones(){
-    if (x <= 60) {
-            x = x + 2;
-            r1 = r1 + 3;
-            return colision=true;
-           
+    
+    public Colisiones(auto a){
+        auto = a;
+    }
+
+    public boolean Colisiones() {
+        if (auto.x <= 60) {
+            auto.x = auto.x + 2;
+            return colision = true;
+
         }
-        if (x >= 1485 ){
-            x = x - 2;
-            r1 = r1-3;
-            return colision=true;
+        if (auto.x >= 1485) {
+            auto.x = auto.x - 2;
+            return colision = true;
         }
-        if (y <= 60 ) {
-            y = y + 2;
-            r2 = r2 + 3;
-            return colision=true;
+        if (auto.y <= 60) {
+            auto.y = auto.y + 2;
+            return colision = true;
         }
-        if (y >= 785){
-            y = y - 2;
-            r2 = r2 - 3;
-            return colision=true;
+        if (auto.y >= 785) {
+            auto.y = auto.y - 2;
+            return colision = true;
         }
-     
-   
-       
-return colision=false;
-}
-public boolean Colisionestierra(){
-    if((x>= 350 && x<=1250)&&(y>=349 && y <=350)){
-        y = y-1;
-        r2 = r2-2;
-        return colision=true;}
-       if((x>= 350 && x<=1250)&&(y>=549 && y <=550)){
-        y = y+1;
-        r2 = r2+2;
-        return colision=true;
-       }
-       if((x>= 350 && x<351)&&(y>=350 && y <=549)){
-        x = x-1;
-        r1 = r1-2;
-        return colision=true;
-       }
-        if((x>= 1250 && x<1251)&&(y>=350 && y <=549)){
-        x = x+1;
-        r1 = r1+2;
-        return colision=true;
-       }
-      
-    return false;
-}
-public boolean roce(){
-     if(x>=200 && y>=200 && x <=1300 && y<=700){
-         
-         return roce=true;
-     }
-     
-    return roce=false;
-}
+
+        return colision = false;
+    }
+
+    public boolean Colisionestierra() {
+        if ((auto.x >= 350 && auto.x <= 1250) && (auto.y >= 349 && auto.y <= 350)) {
+            auto.y = auto.y - 1;
+            return colision = true;
+        }
+        if ((auto.x >= 350 && auto.x <= 1250) && (auto.y >= 549 && auto.y <= 550)) {
+            auto.y = auto.y + 1;
+            return colision = true;
+        }
+        if ((auto.x >= 350 && auto.x < 351) && (auto.y >= 350 && auto.y <= 549)) {
+            auto.x = auto.x - 1;
+            return colision = true;
+        }
+        if ((auto.x >= 1250 && auto.x < 1251) && (auto.y >= 350 && auto.y <= 549)) {
+            auto.x = auto.x + 1;
+            return colision = true;
+        }
+
+        return false;
+    }
+
+    public boolean roce() {
+        if (auto.x >= 200 && auto.y >= 200 && auto.x <= 1300 && auto.y <= 700) {
+
+            return roce = true;
+        }
+
+        return roce = false;
+    }
 }
