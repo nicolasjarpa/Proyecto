@@ -66,12 +66,12 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
             auto.angle -= 0.5f;
         }
         auto.a = a;
-        
+
         if (d) {
             auto.angle += 0.5f;
         }
         auto.d = d;
-        
+
         if (coli.roce == true) {
             if (auto.vel > 0.4f) {
                 auto.vel = 0.4f;
@@ -93,10 +93,9 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
             System.out.println("colision" + this.auto.x);
             System.out.println("colision" + this.auto.y);
         }
-        
+
         auto.paint(g);
 
-        
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
         repaint();
@@ -177,15 +176,22 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == aumento) {
             autopista.pastomas += 5f;
+        
 
-            if (getWidth() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getWidth() - 400 && getHeight() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getHeight() - 400) {
-                autopista.pastomas = 0f;
+            if ((int) getWidth() - 400 - (int) autopista.pastomas == (int) getWidth() - 500) {
+                System.out.println("The track can't be smaller!");
+                autopista.pastomas = autopista.pastomas - 5f;
             }
         } else if (e.getSource() == decrease) {
-            autopista.pastomenos += 5f;
+            float aux = 0;
+            autopista.pastomas -= 5f;
+            aux = getWidth() - 400 + (int) autopista.pastomas;
+            System.out.println(aux);
+            System.out.println(getWidth() - 540);
 
-            if (getWidth() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getWidth() - 400 && getHeight() - 400 + (int) autopista.pastomas - (int) autopista.pastomenos == getHeight() - 400) {
-                autopista.pastomenos = 0f;
+            if (getWidth() - 400 + (int) autopista.pastomas == (int) getWidth() - 540) {
+                System.out.println("The track can't be bigger!");
+                autopista.pastomas = autopista.pastomas + 5f;
             }
         }
     }
@@ -193,8 +199,14 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public void config() {
         this.setLayout(null);
         grupo.add(aumento);
-        aumento.setBounds(0, 0, 150, 150);
+        grupo.add(decrease);
+        decrease.setBounds(100, 835, 100, 100);
+        aumento.setBounds(300, 835, 100, 100);
         this.add(aumento);
+        this.add(decrease);
+        decrease.addActionListener(this);
+        decrease.setVisible(true);
+        decrease.setFocusable(false);
         aumento.addActionListener(this);
         aumento.setVisible(true);
         aumento.setFocusable(false);

@@ -20,7 +20,7 @@ public class frame extends JFrame{
     Interfaz ventana = new Interfaz();
 
     public frame() {
-        this.setSize(1600, 900);
+        this.setSize(1600, 1000);
         this.add(ventana);
         this.setTitle(" Super Auto");
         this.setLocationRelativeTo(null);
