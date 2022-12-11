@@ -3,6 +3,7 @@ package projecto;
 
 import javax.swing.JFrame;
 
+/** En el main solo ejecutamos el frame para que se muestre */
 
 public class Projecto {
 

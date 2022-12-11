@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
+/** Clase donde armamos nuestro auto */
+
 public class auto {
 
     float vel = 0f;
@@ -20,6 +22,13 @@ public class auto {
     Rueda rueda2;
     Rueda rueda3;
     
+    /** En el constructor, realmente lo mas descriptivo es decir que
+     * construimos el auto, le añadimos sus coordenadas, su angulo
+     * y finalmente las cuatro ruedas
+     * @param x
+     * @param y 
+     */
+    
     public auto(float x, float y){
         this.x = x;
         this.y = y ;
@@ -29,6 +38,12 @@ public class auto {
         rueda2 = new Rueda(-25, -28, this);
         rueda3 = new Rueda(-25, 28, this);
     }
+    
+    /** Esta clase tiene la utilidad de mostrarnos el auto que estamos 
+     * definiendo en el constructor en pantalla, ademas de utilizar las otras
+     * clases que estan mas abajo
+     * @param g 
+     */
 
     public void paint(Graphics g) {
         
@@ -54,11 +69,20 @@ public class auto {
         rueda3.paint(g);
     }
     
+    /** Clase para mover nuestro vehiculo, incluye el roce del viento como
+     * un detalle adicional, ya que la velocidad es multiplicada por un
+     * float inferior a 1
+     */
+    
     public void mover(){
         vel *= 0.995f;
         x += vel * Math.cos(Math.toRadians(angle));
         y += vel * Math.sin(Math.toRadians(angle));
     }
+    
+    /** Clase para rotar el vehiculo, esta trabaja con los angulos del mismo
+     * 
+     */
     
     public void update_auto() {
         float cos = (float) Math.cos(Math.toRadians(angle));

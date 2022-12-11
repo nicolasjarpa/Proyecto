@@ -15,10 +15,13 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import java.awt.event.*;
 
+/** Creacion de la ventana del proyecto */
 public class frame extends JFrame{
 
     Interfaz ventana = new Interfaz();
-
+    
+    /** En su constructor definimos los parametros como nombre, tamaño, etc */
+    
     public frame() {
         this.setSize(1600, 1000);
         this.add(ventana);

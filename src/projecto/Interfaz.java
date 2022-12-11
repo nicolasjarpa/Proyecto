@@ -14,7 +14,8 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import java.awt.event.*;
 import java.awt.Shape;
-
+/** Interfaz grafica de la aplicacion, acá encontramos todo
+lo relacionado con el movimiento y las acciones del teclado, botones, etc */
 public class Interfaz extends JPanel implements KeyListener, ActionListener {
 
     private Image fondo;
@@ -31,27 +32,26 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public JButton aumento = new JButton("aumentar");
     public JButton decrease = new JButton();
     public ButtonGroup grupo = new ButtonGroup();
-    private AutoTests test;
     Polygon p = new Polygon();
-    float aux;
-    public Interfaz() {
+    
+    /** Constructor de nuestra interfaz, aca definimos nuestro vehiculo y las colisiones */
+    
+    public Interfaz() { 
         auto = new auto(150, 200);
         coli = new Colisiones(auto);
-        test = new AutoTests();
         
         /* fondo = new ImageIcon("pista3.png").getImage(); */
     }
+    
+    /** Aca se pinta todo lo que tiene que ver con la velocidad, incluyendo el roce y los angulos */
 
     @Override
     public void paint(Graphics g) {
 
         super.paint(g);
-        
         circuito.paint(g);
 
-        /*g.drawImage(fondo, 0, 0, getWidth(), getHeight(), null);
-        setOpaque(false);*/
-        test.SpeedTest(auto);
+
         if (w) {
             if (coli.roce == true) {
                 auto.vel += 0.0025f;
@@ -86,7 +86,7 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         }
 
         auto.mover();
-        coli.roce(aux);
+        coli.roce(circuito.pastomas);
         coli.Colisiones();
         coli.Colisionestierra();
         if (coli.roce == true) {
@@ -111,7 +111,12 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public void keyTyped(KeyEvent e) {
 
     }
-
+    
+    /** Comandos de una clase abstracta para que el juego reaccione ante el input wasd,
+     * planeabamos tambien hacer que funcionen las flechas con otro auto, pero no alcanzamos
+     * @param e 
+     */
+    
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -144,6 +149,8 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         }*/
     }
 
+    /** Cuando sueltas las teclas */
+    
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -177,6 +184,8 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         }*/
     }
 
+    /** Esta es la clase en la cual configuramos los botones para aumentar o disminuir la pista */
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == aumento) {
@@ -197,6 +206,8 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
             }
         }
     }
+    
+    /** Esta clase es para añadir los botones a la pantalla, estos son invisibles y estan representados por una imagen sobrepuesta */
 
     public void config() {
         this.setLayout(null);
@@ -214,6 +225,8 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         aumento.setFocusable(false);
 
     }
+    
+    /** Estas clases se autodescriben */
 
     public int getpanelHeight() {
         return getHeight();
