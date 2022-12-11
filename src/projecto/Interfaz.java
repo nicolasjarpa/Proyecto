@@ -27,16 +27,18 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     private float width = getWidth() - 400;
     private float height = getHeight() - 400;
     public Autopista autopista = new Autopista();
+    public circuito circuito =new circuito();
     public JButton aumento = new JButton("aumentar");
     public JButton decrease = new JButton();
     public ButtonGroup grupo = new ButtonGroup();
     private AutoTests test;
     Polygon p = new Polygon();
-
+    float aux;
     public Interfaz() {
         auto = new auto(150, 200);
         coli = new Colisiones(auto);
         test = new AutoTests();
+        
         /* fondo = new ImageIcon("pista3.png").getImage(); */
     }
 
@@ -44,7 +46,8 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public void paint(Graphics g) {
 
         super.paint(g);
-        autopista.paint(g);
+        
+        circuito.paint(g);
 
         /*g.drawImage(fondo, 0, 0, getWidth(), getHeight(), null);
         setOpaque(false);*/
@@ -83,15 +86,15 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         }
 
         auto.mover();
-        coli.roce(autopista.pastomas);
+        coli.roce(aux);
         coli.Colisiones();
         coli.Colisionestierra();
         if (coli.roce == true) {
             System.out.println("roce");
         }
         if (coli.colision == true) {
-            System.out.println("" + autopista.largopasto);
-            System.out.println("" + autopista.altopasto);
+            System.out.println("" + circuito.alto);
+            System.out.println("" + circuito.largo);
             System.out.println("colision" + this.auto.x);
             System.out.println("colision" + this.auto.y);
         }
@@ -177,20 +180,20 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == aumento) {
-            autopista.pastomas += 5f;
-        
+            circuito.pastomas += 5f;
 
-            if ((int) getWidth() - 400 - (int) autopista.pastomas == (int) getWidth() - 500) {
+
+            if ((int) getWidth() - 400 - (int) circuito.pastomas == (int) getWidth() - 500) {
                 System.out.println("The track can't be smaller!");
-                autopista.pastomas = autopista.pastomas - 5f;
+                circuito.pastomas = circuito.pastomas - 5f;
             }
         } else if (e.getSource() == decrease) {
-            autopista.pastomas -= 5f;
+            circuito.pastomas -= 5f;
 
 
-            if (getWidth() - 400 + (int) autopista.pastomas == (int) getWidth() - 540) {
+            if (getWidth() - 400 + (int) circuito.pastomas == (int) getWidth() - 540) {
                 System.out.println("The track can't be bigger!");
-                autopista.pastomas = autopista.pastomas + 5f;
+                circuito.pastomas = circuito.pastomas + 5f;
             }
         }
     }
