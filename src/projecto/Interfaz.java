@@ -30,12 +30,13 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public JButton aumento = new JButton("aumentar");
     public JButton decrease = new JButton();
     public ButtonGroup grupo = new ButtonGroup();
+    private AutoTests test;
     Polygon p = new Polygon();
 
     public Interfaz() {
         auto = new auto(150, 200);
         coli = new Colisiones(auto);
-
+        test = new AutoTests();
         /* fondo = new ImageIcon("pista3.png").getImage(); */
     }
 
@@ -47,6 +48,7 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
 
         /*g.drawImage(fondo, 0, 0, getWidth(), getHeight(), null);
         setOpaque(false);*/
+        test.SpeedTest(auto);
         if (w) {
             if (coli.roce == true) {
                 auto.vel += 0.0025f;
@@ -81,7 +83,7 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
         }
 
         auto.mover();
-        coli.roce();
+        coli.roce(autopista.pastomas);
         coli.Colisiones();
         coli.Colisionestierra();
         if (coli.roce == true) {
@@ -183,11 +185,8 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
                 autopista.pastomas = autopista.pastomas - 5f;
             }
         } else if (e.getSource() == decrease) {
-            float aux = 0;
             autopista.pastomas -= 5f;
-            aux = getWidth() - 400 + (int) autopista.pastomas;
-            System.out.println(aux);
-            System.out.println(getWidth() - 540);
+
 
             if (getWidth() - 400 + (int) autopista.pastomas == (int) getWidth() - 540) {
                 System.out.println("The track can't be bigger!");
@@ -220,5 +219,6 @@ public class Interfaz extends JPanel implements KeyListener, ActionListener {
     public int getpanelWidth() {
         return getWidth();
     }
+    
 
 }

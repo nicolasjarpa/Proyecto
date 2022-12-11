@@ -16,6 +16,7 @@ public class auto {
     Rueda rueda0;
     Rueda rueda1;
     
+    //atras
     Rueda rueda2;
     Rueda rueda3;
     

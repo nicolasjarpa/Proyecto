@@ -21,6 +21,26 @@ public class Autopista {
         menos = new ImageIcon("menos.jpg").getImage();
     }
 
+    public void limitepaint(Graphics g) {
+        this.limite = g;
+    }
+
+    public void pistapaint(Graphics g) {
+        this.pista = g;
+    }
+
+    public void pastopaint(Graphics g) {
+        this.pasto = g;
+    }
+
+    public void tierrapaint(Graphics g) {
+        this.tierra = g;
+    }
+
+    public Graphics retornarlimite() {
+        return limite;
+    }
+
     public void paint(Graphics g) {
         limite = g;
         pista = g;
@@ -31,7 +51,7 @@ public class Autopista {
         pista.setColor(Color.DARK_GRAY);
         pista.fillRect(50, 50, 1450, 750);
         pasto.setColor(Color.green);
-        pasto.fillRect(190 - (int) pastomas, 190 - (int) pastomas, 1160 + (int) pastomas * 2 , 480 + (int) pastomas * 2);
+        pasto.fillRect(190 - (int) pastomas, 190 - (int) pastomas, 1160 + (int) pastomas * 2, 480 + (int) pastomas * 2);
         tierra.setColor(Color.black);
         tierra.fillRect(330, 330, 880, 200);
         largopasto = 1100 + (int) pastomas;
